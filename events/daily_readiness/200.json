@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "id": "string",
+      "contributors": {
+        "activity_balance": "Contribution of cumulative activity balance in range [1, 100].",
+        "body_temperature": "Contribution of body temperature in range [1, 100].",
+        "hrv_balance": "Contribution of heart rate variability balance in range [1, 100].",
+        "previous_day_activity": "Contribution of previous day's activity in range [1, 100].",
+        "previous_night": "Contribution of previous night's sleep in range [1, 100].",
+        "recovery_index": "Contribution of recovery index in range [1, 100].",
+        "resting_heart_rate": "Contribution of resting heart rate in range [1, 100].",
+        "sleep_balance": "Contribution of sleep balance in range [1, 100]."
+      },
+      "day": "2019-08-24",
+      "score": 0,
+      "temperature_deviation": 0,
+      "temperature_trend_deviation": 0,
+      "timestamp": "2019-08-24T14:15:22Z"
+    }
+  ],
+  "next_token": "string"
+}

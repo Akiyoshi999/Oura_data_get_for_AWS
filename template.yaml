@@ -1,0 +1,108 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: Create a Lambda function that logs something to the console from a cron job in EventBridge
+
+Globals:
+  Function:
+    Timeout: 10
+    MemorySize: 128
+
+Resources:
+  # スケジュール実行用のLambda
+  ScheduledFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/ScheduledFunction/
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Environment:
+        Variables:
+          TOPIC_ARN: !Ref SNSTopic
+          SUBJECT: "Ouraスコアレポート"
+          SLEEP_API_URL: "https://api.ouraring.com/v2/usercollection/daily_sleep"
+          ACTIVE_API_URL: "https://api.ouraring.com/v2/usercollection/daily_activity"
+          READINESS_API_URL: "https://api.ouraring.com/v2/usercollection/daily_readiness"
+          WEEK_SCORE_DAY: "Saturday"
+          HEALTH_BORDER: 69
+          ACTIVE_HEALTH_BORDER: 49
+
+      Events:
+        ScheduledFunction:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 1 * * ? *)
+      Policies:
+        - SNSPublishMessagePolicy:
+            TopicName: !GetAtt SNSTopic.TopicName
+        - arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess
+      Tags:
+        Project: "Oura_data_get"
+        Environment: "Prod"
+    DependsOn: SNSTopic
+
+  # Lambda -> SNS 用のSNSトピック
+  SNSTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: oura-score-get-notice
+      Tags:
+        - Key: "Project"
+          Value: "Oura_data_get"
+        - Key: "Environment"
+          Value: "Prod"
+
+  # LINEに通知を送るLambda
+  LineNoticeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/LineNotice/
+      Handler: app.line_notice_handler
+      Runtime: python3.9
+      Policies:
+        - arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess
+      Architectures:
+        - x86_64
+      Events:
+        SNSTopicEvent:
+          Type: SNS
+          Properties:
+            Topic: !Ref SNSTopic
+      Tags:
+        Project: "Oura_data_get"
+        Environment: "Prod"
+
+  # 各Lambdaのロググループ
+  ScheduledFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${ScheduledFunction}
+      Tags:
+        - Key: "Project"
+          Value: "Oura_data_get"
+        - Key: "Environment"
+          Value: "Prod"
+
+  LineNoticeFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${LineNoticeFunction}
+      Tags:
+        - Key: "Project"
+          Value: "Oura_data_get"
+        - Key: "Environment"
+          Value: "Prod"
+
+Outputs:
+  # RestApiEndpoint:
+  #   Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+  #   Value: !Sub "https://${WebApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  SNSTopic:
+    Description: "SNS Topic ARN"
+    Value: !GetAtt SNSTopic.TopicArn
+  ScheduledFunction:
+    Description: "Scheduled Function ARN"
+    Value: !GetAtt ScheduledFunction.Arn
+
+  LineNoticeFunction:
+    Description: "Line Notice Function ARN"
+    Value: !GetAtt LineNoticeFunction.Arn

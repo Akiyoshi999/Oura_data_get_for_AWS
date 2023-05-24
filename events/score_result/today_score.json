@@ -1,0 +1,4 @@
+{
+  "statusCode": 200,
+  "body": "{\"messeage\": \"\\n===============\\n\\u672c\\u65e5\\u306e\\u30b9\\u30b3\\u30a2\\nsleep        =    62\\nactive       =    69\\nreadiness    =    69\\n===============\\n1\\u9031\\u9593\\u306e\\u5e73\\u5747\\u30b9\\u30b3\\u30a2\\nsleep =  61.8\\nactive =  64.7\\nreadiness =  68.2\\n===============\\n\\u4eca\\u65e5\\u306fsleep, active, readiness\\u304c\\u4e0d\\u8abf\\u307f\\u305f\\u3044\\u3002\"}"
+}

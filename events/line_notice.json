@@ -1,0 +1,22 @@
+{
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "EventVersion": "1.0",
+      "EventSubscriptionArn": "arn:aws:sns:ap-northeast-1:705427061380:static-site-notice:a0547382-b028-47d9-b546-bd68cc66455a",
+      "Sns": {
+        "Type": "Notification",
+        "MessageId": "37c2b830-f9f7-5e8c-9aaf-e4b7a0d383be",
+        "TopicArn": "arn:aws:sns:ap-northeast-1:705427061380:static-site-notice",
+        "Subject": "Ouraスコアレポート",
+        "Message": "\\n===============\\n\\u672c\\u65e5\\u306e\\u30b9\\u30b3\\u30a2\\nsleep        =    62\\nactive       =    69\\nreadiness    =    69\\n===============\\n1\\u9031\\u9593\\u306e\\u5e73\\u5747\\u30b9\\u30b3\\u30a2\\nsleep =  61.8\\nactive =  64.7\\nreadiness =  68.2\\n===============\\n\\u4eca\\u65e5\\u306fsleep, active, readiness\\u304c\\u4e0d\\u8abf\\u307f\\u305f\\u3044\\u3002\"}",
+        "Timestamp": "2023-03-12T04:36:52.649Z",
+        "SignatureVersion": "1",
+        "Signature": "ItdF2OelXSqPsbewsA8mKjGep7/U2WIcJ+OURX28h7TQmNcZtQzBLhXIRYXMDlIUYeRIWfPF+Ch/WrS1xkeX7L0lU2c/RN5XDScVZt9/gHl2zNHqXxeMb9t79AgbDEBmad0vvMtmVsaXtftvSCkEg7r2ObcppK6n4D5tA8h+jU9OLdirQ1Mc6mi3jU69DNB/ZQNRDRMxY3W1fqlCj1Xp2PnqmGG7FwgvUzlsyewk/ZdYULv+ftewSNitDizuzfqHWoK/sSsAu2wJfCWUTBcgkLxpxdwpi4x49nKyE0YISwMieLgC7KdGREZa2/2xyRH8gx7ETBnhUNlcE6Kegtq0ng==",
+        "SigningCertUrl": "https://sns.ap-northeast-1.amazonaws.com/SimpleNotificationService-56e67fcb41f6fec09b0196692625d385.pem",
+        "UnsubscribeUrl": "https://sns.ap-northeast-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:ap-northeast-1:705427061380:static-site-notice:a0547382-b028-47d9-b546-bd68cc66455a",
+        "MessageAttributes": {}
+      }
+    }
+  ]
+}
