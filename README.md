@@ -20,9 +20,12 @@ Oura ring は自分の睡眠状態や健康状態を数値化してくれる便�
 
 ## 使い方
 
-1. 事前準備で使用した token の値を[code/config.ini]ファイルの各項目に記載する。また 1 週間のデータをまとめて取得したい曜日を設定する。
-1. 事前準備で使用した token の値を[code/config.ini]ファイルの各項目に記載する。また 1 週間のデータをまとめて取得したい曜日を設定する。
-1. 毎日 10 時頃に Event bridge を経由して Lambda が実行される。 LINE に本日のスコアが送信される。
+1. 事前準備で使用した token の値や 1 週間のデータをまとめて取得したい曜日をパラメータストアに追記する。
+1. 毎日 10 時頃に Event bridge を経由して Lambda が実行される。 LINE に本日のスコアが送信される。1 週間のスコアを取得している曜日であれば、1 週間のスコアの平均点も送信される。
+
+## 構成
+
+![architecture dio drawio](https://github.com/Akiyoshi999/Oura_data_get_for_AWS/assets/47466766/a055cf97-1ecb-40d8-8703-cd332ba0d671)
 
 ## 使用画面
 
