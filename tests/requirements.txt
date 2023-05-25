@@ -1,12 +1,7 @@
 pytest
 boto3
 requests
-json
-os
-datetime
-calendar
 boto3
 botocore
 moto
 requests_mock
-re
