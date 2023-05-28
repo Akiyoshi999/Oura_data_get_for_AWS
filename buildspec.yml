@@ -11,10 +11,12 @@ phases:
     commands:
       - echo 'Building...'
       - python -m pytest tests/unit --junitxml=reports/unit-report.xml
-      - aws cloudformation package --template-file template.yaml --s3-bucket $S3_BUCKET --output-template-file output.yml
-      # - aws cloudformation deploy --template-file output.yml --s3-bucket $S3_BUCKET --stack-name $STACKNAME --capabilities CAPABILITY_IAM --region $REGION --parameter-overrides Env=$ENV
-      - aws cloudformation deploy --template-file output.yml --s3-bucket $S3_BUCKET --stack-name $STACKNAME --capabilities CAPABILITY_IAM --region $REGION
-      - aws cloudformation describe-stacks --stack-name $STACKNAME
+      - wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip
+      - unzip aws-sam-cli-linux-x86_64.zip -d sam-installation
+      - sudo ./sam-installation/install
+      - sam build
+      - sam deploy --no-confirm-changeset
+
 reports:
   pytest_reports:
     files:
