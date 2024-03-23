@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/akiyoshi/work/01_dev/03_Oura_data_get/eventbridge-scheduled-lambda/.venv"
+set -gx VIRTUAL_ENV "/Users/akiyoshi/work/01_dev/03_Oura_data_get/Oura_data_get_for_AWS/.venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

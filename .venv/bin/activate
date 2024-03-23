@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/akiyoshi/work/01_dev/03_Oura_data_get/eventbridge-scheduled-lambda/.venv"
+VIRTUAL_ENV="/Users/akiyoshi/work/01_dev/03_Oura_data_get/Oura_data_get_for_AWS/.venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

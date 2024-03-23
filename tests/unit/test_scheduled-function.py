@@ -6,7 +6,7 @@ import boto3
 import botocore
 
 from src.ScheduledFunction import app
-from moto import mock_sns, mock_ssm
+from moto import mock_aws
 from tests.unit.variables import DAILY_NO_SCORE, DAILY_SCORE_ONEDAY_HEALTY, DAILY_SCORE_ONEDAY_UNHEALTY, WEEKLY_SCORE
 import pytest
 import requests_mock
@@ -86,8 +86,7 @@ def request_mock_daily_no_score_sleep(today_url):
         yield
 
 
-@mock_sns
-@mock_ssm
+@mock_aws
 def test_schedule_success_1(request_mock_daily_score, os_env_setup):
     """正常系のテスト
     当日のスコア取得テスト
@@ -117,8 +116,7 @@ def test_schedule_success_1(request_mock_daily_score, os_env_setup):
         r'(^(sleep).*70)|(^(active).*50)|(^(readiness).*70)|(本日の体調は良好です)', data['SendMessage'], re.MULTILINE)) == 4
 
 
-@mock_sns
-@mock_ssm
+@mock_aws
 def test_schedule_success_2(request_mock_daily_score_unhealty, os_env_setup):
     """正常系のテスト
     当日のスコア取得テスト(体調が悪い時のテスト)
@@ -147,8 +145,7 @@ def test_schedule_success_2(request_mock_daily_score_unhealty, os_env_setup):
         r'(^(sleep).*69)|(^(active).*49)|(^(readiness).*69)|(今日はsleep, active, readinessが不調みたい。)', data['SendMessage'], re.MULTILINE)) == 4
 
 
-@mock_sns
-@mock_ssm
+@mock_aws
 def test_schedule_success_3(request_mock_weekly_score, os_env_setup):
     """正常系のテスト
     当日のスコア取得テスト(1週間)
@@ -179,8 +176,7 @@ def test_schedule_success_3(request_mock_weekly_score, os_env_setup):
         r'(^(sleep).*([0-9]{2}\.[0-9])$)|(^(active).*([0-9]{2}\.[0-9])$)|(^(readiness).*([0-9]{2}\.[0-9])$)|(1週間の平均スコア)', data['SendMessage'], re.MULTILINE)) == 4
 
 
-@mock_sns
-@mock_ssm
+@mock_aws
 def test_schedule_success_4(request_mock_daily_no_score, os_env_setup):
     """正常系のテスト
     当日のスコアが全部取得できない
@@ -207,8 +203,7 @@ def test_schedule_success_4(request_mock_daily_no_score, os_env_setup):
         r'[0-9]', data['SendMessage'], re.MULTILINE)) == 0
 
 
-@mock_sns
-@mock_ssm
+@mock_aws
 def test_schedule_success_5(request_mock_daily_no_score_sleep, os_env_setup):
     """正常系のテスト
     当日のスコアがsleepのみ取得できない
@@ -235,8 +230,7 @@ def test_schedule_success_5(request_mock_daily_no_score_sleep, os_env_setup):
         r'(^(active).*([0-9]{2})$)|(^(readiness).*([0-9]{2})$)', data['SendMessage'], re.MULTILINE)) == 2
 
 
-@mock_sns
-@mock_ssm
+@mock_aws
 def test_schedule_fail_1(request_mock_daily_score_unhealty, os_env_setup):
     """異常系のテスト
     SNSのエンドポイントがない場合

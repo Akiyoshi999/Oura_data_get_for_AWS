@@ -8,7 +8,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV "/Users/akiyoshi/work/01_dev/03_Oura_data_get/eventbridge-scheduled-lambda/.venv"
+setenv VIRTUAL_ENV "/Users/akiyoshi/work/01_dev/03_Oura_data_get/Oura_data_get_for_AWS/.venv"
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/bin:$PATH"

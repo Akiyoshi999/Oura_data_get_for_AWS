@@ -1,6 +1,7 @@
 import json
 import requests
 import pytest
+from moto import mock_aws
 import requests_mock
 import boto3
 import botocore
@@ -21,7 +22,7 @@ def request_mock_invalid_token():
                      text='{"status":401,"message":"invalid access token"}', status_code=401)
 
 
-@mock_ssm
+@mock_aws
 def test_line_notice_success(sns_event_success, request_mock_success):
     """
     LINEの通知が成功した場合のテスト
@@ -46,7 +47,7 @@ def test_line_notice_success(sns_event_success, request_mock_success):
     assert body['message'] == 'ok'
 
 
-@mock_ssm
+@mock_aws
 def test_line_notice_no_ssm(sns_event_success, request_mock_success):
     """
     SSMにパラメータがない場合、ClientErrorを出力する。
@@ -62,7 +63,7 @@ def test_line_notice_no_ssm(sns_event_success, request_mock_success):
         app.line_notice_handler(sns_event_success, "")
 
 
-@mock_ssm
+@mock_aws
 def test_line_notice_invalid_token(sns_event_success, request_mock_invalid_token):
     """
     アクセストークンが無効の場合、HTTPErrorを出力する。

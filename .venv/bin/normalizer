@@ -1,8 +1,8 @@
-#!/Users/akiyoshi/work/01_dev/03_Oura_data_get/eventbridge-scheduled-lambda/.venv/bin/python3.11
+#!/Users/akiyoshi/work/01_dev/03_Oura_data_get/Oura_data_get_for_AWS/.venv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys
-from charset_normalizer.cli.normalizer import cli_detect
+from charset_normalizer.cli import cli_detect
 if __name__ == '__main__':
     sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
     sys.exit(cli_detect())
