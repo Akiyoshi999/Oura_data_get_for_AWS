@@ -14,7 +14,7 @@ Resources:
     Properties:
       CodeUri: src/ScheduledFunction/
       Handler: app.lambda_handler
-      Runtime: python3.9
+      Runtime: python3.11
       Environment:
         Variables:
           TOPIC_ARN: !Ref SNSTopic
@@ -58,7 +58,7 @@ Resources:
     Properties:
       CodeUri: src/LineNotice/
       Handler: app.line_notice_handler
-      Runtime: python3.9
+      Runtime: python3.11
       Policies:
         - arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess
       Architectures:
