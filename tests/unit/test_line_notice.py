@@ -1,7 +1,6 @@
 import json
 import requests
 import pytest
-from moto import mock_ssm
 import requests_mock
 import boto3
 import botocore
